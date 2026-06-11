@@ -1,12 +1,12 @@
 #!/bin/sh
 
 
-if ! [[ $(command -v curl) ]]; then
+if [ ! $(command -v curl) ]; then
     echo "curl must be installed"
     exit 1
 fi
 
-if ! [[ $(command -v git) ]]; then
+if [[ ! $(command -v git) ]]; then
     echo "git must be installed"
     exit 1
 fi
