@@ -1,2 +1,2 @@
 This repostory hosts the installation script for my Unix [dotfiles](https://wiki.archlinux.org/title/Dotfiles). The actual dotfiles are hosted in a private
-repository which this script enable access to. For technical reasons it is convenient for this repository to be public, but there is nothing for the public to actually see or use here.
+repository which this script enables access to. For technical reasons it is convenient for this repository to be public, but there is nothing for the public to actually see or use here.
