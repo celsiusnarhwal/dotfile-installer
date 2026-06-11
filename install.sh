@@ -10,12 +10,14 @@ if [ ! $(command -v git) ]; then
     exit 1
 fi
 
-cd $(mktemp -d)
+tmpdir=$(mktemp -d)
 
-export PATH=$HOME/.local/bin:$PATH
+cd "$tmpdir"
 
-curl -fsSL https://mise.run | sh
+curl -fsSL https://astral.sh/uv/install.sh | env UV_UNMANAGED_INSTALL="$tmpdir" sh
 
-export GITHUB_TOKEN=$(mise exec github:celsiusnarhwal/celty -- celty --client-id Iv23liTL851FJR1MJQIm)
+export GITHUB_TOKEN=$(./uvx celty --client-id Iv23liTL851FJR1MJQIm)
 
 sh -c "$(curl -fsSL https://get.chezmoi.io)" -- -b ~/.local/bin -- init --apply https://git:${GITHUB_TOKEN}@github.com/celsiusnarhwal/dotfiles
+
+rm -rf "$tmpdir"
