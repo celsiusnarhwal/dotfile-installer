@@ -6,15 +6,17 @@ if [ ! $(command -v curl) ]; then
     exit 1
 fi
 
-if [[ ! $(command -v git) ]]; then
+if [ ! $(command -v git) ]; then
     echo "git must be installed"
     exit 1
 fi
+
+cd $(mktemp -d)
 
 export PATH=$HOME/.local/bin:$PATH
 
 curl -fsSL https://mise.run | sh
 
-export GITHUB_TOKEN=$(mise exec github:celsiusnarhwal/celty -- celty --client-id Iv23liTL851FJR1MJQIm)
+export GITHUB_TOKEN=$(mise use -g github:celsiusnarhwal/celty && $(mise which celty) --client-id Iv23liTL851FJR1MJQIm)
 
-sh -c "$(curl -fsSL https://get.chezmoi.io)" -b ~/.local/bin -- init --apply https://git:${GITHUB_TOKEN}@github.com/celsiusnarhwal/dotfiles
+sh -c "$(curl -fsSL https://get.chezmoi.io)" -- -b ~/.local/bin -- init --apply https://git:${GITHUB_TOKEN}@github.com/celsiusnarhwal/dotfiles
